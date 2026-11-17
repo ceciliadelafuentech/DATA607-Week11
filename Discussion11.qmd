@@ -1,0 +1,135 @@
+---
+title: "Discussion11"
+author: "Cecilia De La Fuente Chavez"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    theme: cosmo
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: false
+---
+
+# **Introduction**
+
+For this project, I examined YouTube's video recommendation system. I focused on recommendations listed on the homepage and in the Up Next section. YouTube personalizes these recommendations using signals such as watch history, search activity, and viewer feedback. The homepage primarily relies on watch history, while Up Next recommendations are influenced by the video currently being watched ([YouTube Help, “How YouTube recommendations work”](https://support.google.com/youtube/answer/16089387)).
+
+I selected YouTube because I regularly use it to watch a wide range of videos from news reports and documentaries to vlogs about travel and crafts. This gives me an opportunity to examine how recommendations reflect long-established interests while also introducing new or unfamiliar topics and creators. I am particularly interested in how the system balances relevance, variety, and discovery.
+
+# **Scenario Design**
+
+## **Customer perspective**
+
+**1. Who are the target users?**
+
+The target users are people who use YouTube to find informative, instructional, or entertaining content. Some rely on recommendations to discover videos, while others visit the platform with a specific topic or creator in mind.
+
+**2. What are their goals?**
+
+Viewers want to find relevant content without having to do extensive research, including discovering unfamiliar topics and creators. Recommendations should reflect established interests without becoming repetitive or overrecommending topics explored casually. They may also want to maintain some control over what is being shown on their feeds.
+
+**3. How can YouTube help them accomplish these goals?**
+
+YouTube can use viewing history, search activity, subscriptions, and viewer feedback to personalize recommendations. It can also introduce videos from unfamiliar creators and related topics to support discovery. Better recognition of casual or temporary interests and greater control over recommendation formats could further improve the viewing experience.
+
+## **Organization perspective**
+
+**1. Who are the target users and stakeholders?**
+
+YouTube's recommendation system serves viewers, but creators and publishers, advertisers and YouTube itself are also important stakeholders.
+
+**2. What are the organization's goals?**
+
+YouTube identifies helping viewers find videos they want and maximizing long-term viewer satisfaction as goals of its recommendation system ([YouTube, “YouTube's Recommendation System”](https://support.google.com/youtube/answer/16533387)). It also seeks to encourage continued platform use, help creators reach audiences, and support its advertising and subscription businesses.
+
+**3. How can YouTube help accomplish these goals?**
+
+YouTube can use viewing behavior, feedback, and video performance to connect audiences with content they may enjoy. Recommendations can introduce viewers to new creators and help creators reach potential audiences. By making recommendations relevant, YouTube can support continued engagement with the platform.
+
+These goals may not always align with individual viewer preferences. For example, some viewers may prefer finding a small number of valuable, longer-form videos rather than spending more time scrolling short-form content, a newly introduced format. This creates a potential tension between encouraging continued platform use and providing the viewing experience that users want.
+
+# **Reverse Engineering**
+
+## **Recommendation signals**
+
+YouTube uses several signals to personalize recommendations. Its published documentation identifies the following:
+
+- **Watch history:** Helps identify videos and topics a viewer has watched.
+
+- **Search history:** Influences recommendations based on topics a viewer has searched for.
+
+- **Channel subscriptions:** Helps identify creators a viewer follows.
+
+- **Likes and dislikes:** Provide feedback about a viewer's content preferences.
+
+- **Not interested:** Signals that a particular video is not of interest.
+
+- **Don't recommend channel:** Signals that a viewer does not want recommendations from a particular channel.
+
+- **Satisfaction surveys:** Help YouTube assess whether viewers enjoyed a video, beyond measuring watch time.
+
+The importance of these signals varies across YouTube features. For example, watch history is the primary signal for homepage recommendations, while the video currently being watched is the main signal for Up Next recommendations ([YouTube Help, “How YouTube recommendations work”](https://support.google.com/youtube/answer/16089387)).
+
+## **Candidate generation and ranking**
+
+A 2016 Google research paper, Deep Neural Networks for YouTube Recommendations, describes YouTube's recommendation system as having two main stages:
+
+- **Candidate generation:** The system narrows YouTube's video library by using patterns in users' viewing histories and other behavioral signals to identify content they may be interested in. The model considers information such as previously watched videos, search history, and demographic characteristics. Rather than focusing only on the video a user has just watched, it learns relationships between users and videos based on broader viewing patterns. For example, someone who regularly watches history documentaries may receive recommendations for related videos from creators they have not encountered before.
+
+- **Ranking:** Once potential videos have been identified, a second model evaluates and orders them based on how relevant they are likely to be for the individual user. The paper describes using additional information, including previous interactions with the video and similar videos, viewing activity associated with particular channels, and how recently a user watched content on a particular topic. An important part of this approach is that the system aims to predict how long someone might watch a recommended video rather than simply whether they will click on it. The researchers explain that optimizing for click-through rate alone can favor clickbait, whereas expected watch time provides another measure of engagement.
+
+This paper provides insight into the technical design of YouTube's recommendation system at the time of publication. It might not reflect the current design the system uses ([Covington, Adams, and Sargin, 2016](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/)).
+
+## **Measuring viewer response**
+
+YouTube has described using several measures of viewer response to inform recommendations:
+
+- **Clicks:** Whether viewers choose to watch a recommended video.
+
+- **Watch time:** How long viewers spend watching.
+
+- **Shares:** Whether viewers choose to share a video.
+
+- **Satisfaction surveys:** Whether viewers report enjoying the content, including through ratings of one to five stars.
+
+YouTube explains that clicks and watch time alone do not fully indicate whether viewers value a video. Satisfaction surveys help the platform estimate how worthwhile viewers find content, including for people who do not complete surveys. These responses are used to train models that predict viewer satisfaction ([YouTube, “On YouTube's Recommendation System”](https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/)).
+
+## **Personal observations**
+
+My experience generally aligns with YouTube's documented use of viewing history and personalization. My homepage often includes videos from familiar creators and topics I regularly watch. However, recommendations also introduce unfamiliar creators and subjects.
+
+I have noticed that casually searching for a topic can sometimes lead to an increase in related recommendations, even when I do not intend to continue exploring it. At the same time, an interesting topic I encounter once may not appear again. Titles and thumbnails also influence whether I watch unfamiliar videos. I am more likely to choose a familiar creator, but an interesting subject can still attract my attention regardless of the creator.
+
+These observations suggest that YouTube's recommendations are generally relevant but could do more to balance established interests with occasional interests and new discoveries. They reflect my experience as a viewer rather than confirmation of how the recommendation system weighs individual signals.
+
+# **Recommendations for Improvement**
+
+**Balance personalization with content diversity**
+
+YouTube could reserve a portion of homepage recommendations for unfamiliar topics and creators. These videos could be selected based on broader patterns of potential interest rather than relying mainly on established interests. This could reduce repetitive recommendations and create more opportunities for discovery.
+
+**Better recognize temporary interests**
+
+YouTube could distinguish between established interests and topics explored out of temporary curiosity. Rather than allowing a brief search to substantially increase recommendations about a topic, the system could treat it as a potential interest and periodically introduce one or two related videos among regular recommendations. This would allow viewers to revisit interesting topics without having their homepage dominated by them.
+
+**Improve user control and transparency**
+
+YouTube could provide clearer information about how feedback such as "Not interested" and "Don't recommend channel" affects recommendations. It could also give viewers more control over the formats displayed on their homepage, including the option to reduce or hide Shorts recommendations. Since some viewers primarily use YouTube for longer-form content, the prominence of Shorts may not align with their viewing preferences.
+
+# **Conclusion**
+
+This analysis examined YouTube's homepage and Up Next recommendation system, focusing on how personalization affects content discovery. YouTube uses several signals to provide relevant recommendations, but my observations point to opportunities to improve the balance between established interests, temporary interests, and new discoveries.
+
+A more effective system would recognize that not every search represents a lasting interest and that viewers may value variety as much as relevance. Greater control over recommendation formats could also help make the viewing experience more useful. Ultimately, recommendations should help viewers find content they value, not simply encourage them to watch more.
+
+# **References**
+
+Covington, P., Adams, J., & Sargin, E. (2016). Deep neural networks for YouTube recommendations. Proceedings of the 10th ACM Conference on Recommender Systems.[Google Research](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/).
+
+YouTube. (n.d.). How YouTube recommendations work. YouTube Help.<https://support.google.com/youtube/answer/16089387>
+
+YouTube. (n.d.). YouTube's recommendation system. YouTube Help.<https://support.google.com/youtube/answer/16533387>
+
+YouTube. (2021). On YouTube's recommendation system. YouTube Blog.<https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/>
